@@ -2,6 +2,7 @@
 	<div class="entry_input">
 		<EntryInput/>
 		<Button/>
+
 	</div>
 </template>
 
@@ -10,14 +11,27 @@ import EntryInput from '../components/EntryInput.vue'
 import Button from '../components/Button.vue'
 
 export default {
-  name: 'EntryParts',
-  props: {
-    // msg: String
-  },
-  components:{
-	Button,
-	EntryInput
-  }
+	name: 'EntryParts',
+	data:function() {
+		return{
+			// txtVal:'',
+		}
+	},
+	components:{
+		Button,
+		EntryInput
+	},
+//     methods:{
+// 	enterButtonFlag:function(){
+// 		console.log('a');
+// 		if (txtVal == false) {
+// 			this.disabled = true;
+// 		} else {
+// 			this.disabled = false;
+// 		}
+// 		return;
+// 	}
+//   }
 }
 </script>
 

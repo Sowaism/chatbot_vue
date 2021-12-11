@@ -1,13 +1,29 @@
 <template>
-	<button id="addbtn" class="inquiry-next-btn" disabled>送信</button>
+	<button id="addbtn" class="inquiry-next-btn" @click="addBtn()" :disabled="isDisabled">送信</button>
 </template>
 
 <script>
 export default {
-  name: 'Button',
-  props: {
-    // msg: String
-  }
+	name: 'Button',
+	data:function() {
+	return{
+		isDisabled:true,
+		value:'',
+	}
+  },
+	methods:{
+		addBtn:function(){
+			this.isDisabled = true;
+		},
+	// 	enterButtonFlag:function() {
+    //     if (txtVal() == false) {
+    //         this.addBtn.disabled = true;
+    //     } else {
+    //         this.addBtn.disabled = false;
+    //     }
+    //     return;
+    // },
+	},
 }
 </script>
 
