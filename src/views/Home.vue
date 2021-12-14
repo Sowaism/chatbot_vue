@@ -11,9 +11,11 @@ import EntryParts from '../components/EntryParts.vue'
 
 export default {
   name: 'Home',
-  props: {
-    // msg: String
-  },
+	data:function() {
+		return{
+			chats : [],
+		}
+	},
   components:{
 	EntryParts,
 	UserList

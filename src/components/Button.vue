@@ -1,29 +1,22 @@
 <template>
-	<button id="addbtn" class="inquiry-next-btn" @click="addBtn()" :disabled="isDisabled">送信</button>
+	<button id="addbtn" class="inquiry-next-btn" :disabled="isDisabled">送信</button>
 </template>
 
 <script>
 export default {
 	name: 'Button',
-	data:function() {
-	return{
-		isDisabled:true,
-		value:'',
+	props:{
+		isDisabled:{ //HTMLに標準で存在する属性と同様の名前は使用NG（トラブルの原因になる）
+			type:Boolean,
+			default:true,
 	}
-  },
-	methods:{
-		addBtn:function(){
-			this.isDisabled = true;
-		},
-	// 	enterButtonFlag:function() {
-    //     if (txtVal() == false) {
-    //         this.addBtn.disabled = true;
-    //     } else {
-    //         this.addBtn.disabled = false;
-    //     }
-    //     return;
-    // },
 	},
+	// methods:{
+	// 	isDisabledCheck:function(isDisabled){
+	// 		console.log('A')
+	// 		return isDisabled == 'true'
+	// 	},
+	// },
 }
 </script>
 
