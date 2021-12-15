@@ -3,7 +3,7 @@
 		<EntryInput :txtVal="txtVal" v-model="txtVal"/>
 		<!-- <Button @click="addArrayMe()" :isDisabled="isDisabled"/> -->
 		<Button @click="addArrayMe()" :isDisabled="isDisabled"/>
-
+		{{isDisabled}}
 		<!-- @click:JavaScript onclick属性と同様(イベントが発生したときに実行する関数を指定するための属性) -->
 		<!-- 左：isDisabledは、子コンポーネントのpropで指定したもの-->
 		<!-- 右：isDisabledは、現在のファイルのdataから取得した値を取得する-->
@@ -16,22 +16,25 @@ import Button from '../components/Button.vue'
 
 export default {
 	name: 'EntryParts',
-	data:function() {
-		return{
+	data:()=>({
 			isDisabled : true,
 			txtVal: '',
-		}
-	},
+	}),
+	// computed:{	
+	// isDisabled:()=>(
+	// 	this.txtVal === ''
+	// ),
+	// },
 	components:{
 		Button,
 		EntryInput
 	},
     methods:{
-		enterButtonFlag: function(){
-		if(this.txtVal !== ''){
-			this.isDisabled == false;
-		}
-		}
+		// enterButtonFlag: function(){
+		// if(this.txtVal !== ''){
+		// 	this.isDisabled == false;
+		// }
+		// }
 	// escapeHTML(string){
 	// 	console.log('A')
 	// 	return string.replace(/\&/g, '&amp;')
