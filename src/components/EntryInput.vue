@@ -1,5 +1,5 @@
 <template>
-	<input id="txtEntry" type="text" class="inquiry-key-entry" placeholder="メッセージを入力" :value="txtVal.value">
+	<input id="txtEntry" type="text" class="inquiry-key-entry" placeholder="メッセージを入力" :value="txtVal">
 </template>
 
 <script>
@@ -8,18 +8,10 @@ export default {
   props: {
     txtVal:{
     type:String,
-    value:'',
+    default:'a',
     }
   },
   methods:{
-    // 		enterButtonFlag:function() {
-    //     if (txtVal() == false) {
-    //         this.addBtn.disabled = true;
-    //     } else {
-    //         this.addBtn.disabled = false;
-    //     }
-    //     return;
-    // },
   }
 }
 </script>
