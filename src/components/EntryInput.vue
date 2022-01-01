@@ -1,5 +1,13 @@
 <template>
-	<input id="txtEntry" type="text" class="inquiry-key-entry" placeholder="メッセージを入力" :value="txtVal">
+	<!-- <input id="txtEntry" type="text" class="inquiry-key-entry" placeholder="メッセージを入力" :value="txtVal"> これでもいけます！-->
+  <input 
+    id="txtEntry"
+    type="text"
+    class="inquiry-key-entry"
+    placeholder="メッセージを入力"
+    :value="txtVal"
+    @input="$emit('update:txtVal', $event.target.value)"
+  >
 </template>
 
 <script>
@@ -8,11 +16,12 @@ export default {
   props: {
     txtVal:{
     type:String,
-    default:'a',
+    default:'',
     }
   },
   methods:{
-  }
+  },
+  emits:['update:txtVal']
 }
 </script>
 

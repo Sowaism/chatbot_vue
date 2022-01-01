@@ -1,5 +1,10 @@
 <template>
-	<button id="addbtn" class="inquiry-next-btn" :disabled="isDisabled">送信</button>
+	<button
+	id="addbtn"
+	:disabled="isDisabled"
+	>
+	送信
+	</button>
 </template>
 
 <script>
@@ -9,14 +14,8 @@ export default {
 		isDisabled:{ //HTMLに標準で存在する属性と同様の名前は使用NG（トラブルの原因になる）
 			type:Boolean,
 			default:true,
-	}
+		}
 	},
-	// methods:{
-	// 	isDisabledCheck:function(isDisabled){
-	// 		console.log('A')
-	// 		return isDisabled == 'true'
-	// 	},
-	// },
 }
 </script>
 
