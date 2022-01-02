@@ -1,7 +1,7 @@
 <template>
   <div class="chatbot">
     <UserList/>
-    <EntryParts/>
+    <EntryParts v-model:txtVal="txtVal"/>
   </div>
 </template>
 
@@ -12,7 +12,8 @@ import EntryParts from './components/EntryParts.vue'
 export default {
   name: 'App',
   data:()=>({ //dataだけは、アロー関数で記述できます
-    chats:[]
+    chats:[],
+    txtVal: '',
   }),
   provide() { //provideは、アロー関数不可
     return {
