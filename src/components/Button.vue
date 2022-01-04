@@ -2,9 +2,11 @@
 	<button
 	id="addbtn"
 	:disabled="isDisabled"
+	@click="$emit('addBtn')"
 	>
 	送信
 	</button>
+	<!--子コンポーネントから親コンポーネントのイベントを発火する https://qiita.com/m_suzu/items/ddb9e68de63c669d408d -->
 </template>
 
 <script>
@@ -14,8 +16,13 @@ export default {
 		isDisabled:{ //HTMLに標準で存在する属性と同様の名前は使用NG（トラブルの原因になる）
 			type:Boolean,
 			default:true,
-		}
+		},
 	},
+	methods:{
+		addBtn(){
+			this.$emit('addBtnParts')
+		},
+	}
 }
 </script>
 

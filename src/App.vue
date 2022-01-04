@@ -1,7 +1,15 @@
 <template>
   <div class="chatbot">
-    <UserList/>
-    <EntryParts/>
+  <!--親コンポーネント：v-bind:props名="state名"でUserListに値を渡す -->
+  <!--     v-model:txtVal="txtVal" -->
+    <UserList
+    :chats="chats"
+    />
+  <!--親コンポーネント：v-on:イベント名で値を受け取る -->
+    <EntryParts
+    v-model:txtVal="txtVal"
+    @addBtnParts="addItem"
+    />
   </div>
 </template>
 
@@ -12,13 +20,9 @@ import EntryParts from './components/EntryParts.vue'
 export default {
   name: 'App',
   data:()=>({ //dataだけは、アロー関数で記述できます
-    chats:[]
+    chats:[],
+    txtVal: '',
   }),
-  provide() { //provideは、アロー関数不可
-    return {
-      chats: this.chats,
-    }
-},
   components:{
     EntryParts,
     UserList
@@ -36,7 +40,6 @@ export default {
       console.log(this.chats);
 			this.txtVal = '' //入力後、文字列を空にする
       this.chats.push(chatYou); //配列にmeのメッセージを入れる
-
 		}
   },
 }

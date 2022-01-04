@@ -2,11 +2,12 @@
 	<div class="entry_input">
 		<!-- <EntryInput :txtVal="txtVal" @input="txtVal = $event.target.value"/> これでも書けます！ -->
 		<EntryInput
-		v-model:txtVal="txtVal"
+		:txtVal="txtVal"
+		@input="$emit('update:txtVal', $event.target.value)"
 		/>
 		<Button
-		@click="addItem"
 		:isDisabled="isDisabled"
+		@addBtn="$emit('addBtnParts')"
 		/>
 		<!-- <div v-for="(chat,index) in chats" :key="index">
 		{{chat.me.txt}}
@@ -23,31 +24,25 @@ import Button from '../components/Button.vue'
 
 export default {
 	name: 'EntryParts',
+	props: ['txtVal'],
 	data:()=>({ //dataだけは、アロー関数で記述できます
-			txtVal: '',
 			player:true,
 	}),
-	inject: ['chats'],
+	// inject: ['chats'],
 	computed:{
 		isDisabled:function() {
-		return this.txtVal === ''
-	},
+			return this.txtVal === ''
+		},
 	},
 	components:{
 		Button,
 		EntryInput
 	},
-    methods:{
-		addItem:function(){
-			// this.chats.innerHTML = '';
-			let chat ={
-				me: {player: true, txt:this.txtVal}
-			}
-			this.chats.push(chat); //配列にmeのメッセージを入れる
-			console.log(this.chats);
-			this.txtVal = '' //入力後、文字列を空にする
-		}
-	},
+	methods:{
+		addBtnParts(){
+			this.$emit('addItem')
+		},
+	}
 }
 </script>
 

@@ -13,12 +13,7 @@
 <script>
 export default {
   name: 'EntryInput',
-  props: {
-    txtVal:{
-    type:String,
-    default:'',
-    }
-  },
+  props:['txtVal'],
   methods:{
   },
   emits:['update:txtVal']
