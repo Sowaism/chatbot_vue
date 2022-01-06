@@ -10,6 +10,7 @@
     v-model:txtVal="txtVal"
     @addBtnParts="addItem"
     />
+  <p :message="message"></p>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ export default {
   data:()=>({ //dataだけは、アロー関数で記述できます
     chats:[],
     txtVal: '',
+    message: '',
   }),
   components:{
     EntryParts,
@@ -37,10 +39,14 @@ export default {
 				you: {player: false, txt:this.botTxts}
 			}
 			this.chats.push(chatMe); //配列にmeのメッセージを入れる
-      console.log(this.chats);
 			this.txtVal = '' //入力後、文字列を空にする
       this.chats.push(chatYou); //配列にmeのメッセージを入れる
-		}
+      console.log(this.chats);
+		},
+    reRenderHTML(){
+      this.message.innerHTML = '';
+      this.message.appendChild('a');
+    }
   },
 }
 </script>
