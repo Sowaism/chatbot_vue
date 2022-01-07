@@ -2,13 +2,16 @@
 	<div id="message_area" class="message_area">
 		<ul>
 			<!-- <UserMeParts :txtVal="txtVal" @input="$emit('update:txtVal', $event.target.value)"/> -->
-			<!-- <li>
-				<div class="my_message">
-					<p>{{txtVal}}</p>
-					<div><img src="@/assets/me.jpg" width="40" height="40" alt="自分の画像"></div>
+			<li v-for="chat in chats" :key="chat">
+				<div :class="isPlayer()">
+					<p>{{chat.txt}}</p>
+					<div>
+						<!--  v-for="alt in altArray" :key="alt" -->
+						<!-- :alt="this.$emit('isAlt')" -->
+						<img :src="src" width="40" height="40" :alt="this.$emit('isAltEmit')">
+					</div>
 				</div>
-			</li> -->
-			<li v-html="domMessageMe"></li>
+			</li>
 			<li>
 				<div class="you_message">
 					<div><img src="@/assets/you.jpg" width="40" height="40" alt="相手の画像"></div>
@@ -24,7 +27,7 @@
 
 export default {
 	name: 'UserList',
-	props: ['chats','txtVal'], //App.vueのデータを扱う
+	props: ['chats','txtVal','player','srcArray','altArray'], //App.vueのデータを扱う
 	data:()=>({
 		randomTxt : [
 		'こんにちは！メッセージありがと〜！',
@@ -34,22 +37,21 @@ export default {
 		'...',
 		'大吉！',
 		],
-		domMessageMe:`<div class="my_message">
-		<p>aaaa</p>
-		<div><img src="@/assets/me.jpg" width="40" height="40" alt="自分の画像"></div>
-		</div>`
+		// isPlayer:this.player,
 	}),
 	computed:{
 	},
 	methods:{
-		// createListItemMe(createElement){
-		// 	innerHTML : `
-		// 		<div class="my_message">
-		// 		<p>${this.txtVal}</p>
-		// 		<div><img src="img/me.jpg" width="40" height="40" alt="自分の画像"></div>
-		// 		</div>`
-		// 	return createElement('li',this.message)
+		isPlayer:function(){
+			console.log(this.player);
+			return this.player ? 'my_message': 'you_message'
+		},
+		// isAlt:function(){
+		// 	return this.player ? this.alt.me: this.alt.you
 		// },
+		isAltEmit() {
+			this.$emit('isAlt')
+			},
 	},
 }
 </script>
@@ -67,13 +69,13 @@ ul{
 li{
 	list-style: none;
 }
-#message_area >>> .my_message{
+.my_message{
 	display: flex;
 	justify-content:flex-end;
 	align-items: center;
 	margin:0 4px;
 }
-#message_area >>> .my_message p{
+.my_message p{
 	max-width: 65%;
 	background-color: #CED4DA;
 	border-radius: 10px;
@@ -83,7 +85,7 @@ li{
 	position: relative;
 	z-index: 3;
 }
-#message_area >>> .my_message p:before {
+.my_message p:before {
 	content: "";
 	position: absolute;
 	top: 2px;
@@ -121,7 +123,7 @@ li{
 	transform: rotate(35deg);
 	z-index: -1;
 }
-#message_area >>> img{
+img{
 	border-radius: 20px;
 }
 </style>

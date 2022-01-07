@@ -4,13 +4,20 @@
   <!--     v-model:txtVal="txtVal" -->
     <UserList
     :chats="chats"
+    :player="player"
+    :src="src"
+    :alt="alt"
+    ref="UserList"
     />
   <!--親コンポーネント：v-on:イベント名で値を受け取る -->
     <EntryParts
     v-model:txtVal="txtVal"
-    @addBtnParts="addItem"
+    @addBtnParts="addArrayMe"
     />
-  <p :message="message"></p>
+  <!-- <div v-for="alt in altArray" :key="alt">
+  <p>{{alt.me}}</p>
+  <p>{{src.imgMe}}</p>
+  </div> -->
   </div>
 </template>
 
@@ -23,30 +30,42 @@ export default {
   data:()=>({ //dataだけは、アロー関数で記述できます
     chats:[],
     txtVal: '',
-    message: '',
+    player: true,
+    srcArray:[
+      {imgMe:require('./assets/me.jpg')},
+      {imgYou:require('@/assets/you.jpg')},
+    ],
+    altArray:[
+      {me:'自分の画像'},
+      {you:'相手の画像'},
+    ],
   }),
   components:{
     EntryParts,
     UserList
   },
   methods:{
-		addItem:function(){
-			// this.chats.innerHTML = '';
-			let chatMe ={
-				me: {player: true, txt:this.txtVal}
-			}
-      let chatYou ={
-				you: {player: false, txt:this.botTxts}
-			}
-			this.chats.push(chatMe); //配列にmeのメッセージを入れる
-			this.txtVal = '' //入力後、文字列を空にする
-      this.chats.push(chatYou); //配列にmeのメッセージを入れる
+    addArrayMe:function(){
+      let chatMe = { player: this.player, txt: this.txtVal };
+      this.chats.push(chatMe); //配列にユーザーのメッセージを入れる
+      this.txtVal = '' //入力後、文字列を空にする
       console.log(this.chats);
+    },
+    addArrayYou:function(){
+      let chatYou = { player: this.player, txt: '今はテキストを挿入します' };
+      this.chats.push(chatYou); //配列にボットのメッセージを入れる
+      console.log(this.chats);
+    },
+		isAlt:function(){
+      this.altArray.forEach(alt => {
+        console.log('isalt発動');
+			return this.player ? alt.me: alt.you;
+      });
 		},
-    reRenderHTML(){
-      this.message.innerHTML = '';
-      this.message.appendChild('a');
-    }
+    // reRenderHTML(){
+    //   this.message.innerHTML = '';
+    //   this.message.appendChild('a');
+    // }
   },
 }
 </script>

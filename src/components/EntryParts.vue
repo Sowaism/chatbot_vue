@@ -40,7 +40,7 @@ export default {
 	},
 	methods:{
 		addBtnParts(){
-			this.$emit('addItem')
+			this.$emit('addArrayMe')
 		},
 	}
 }
