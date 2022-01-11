@@ -2,12 +2,10 @@
   <div class="chatbot">
   <!--親コンポーネント：v-bind:props名="state名"でUserListに値を渡す -->
   <!--     v-model:txtVal="txtVal" -->
-    <UserList
+    <MessageList
     :chats="chats"
     :player="player"
-    :src="src"
-    :alt="alt"
-    ref="UserList"
+    :txtVal="txtVal"
     />
   <!--親コンポーネント：v-on:イベント名で値を受け取る -->
     <EntryParts
@@ -22,7 +20,7 @@
 </template>
 
 <script>
-import UserList from './components/UserList.vue'
+import MessageList from './components/MessageList.vue'
 import EntryParts from './components/EntryParts.vue'
 
 export default {
@@ -31,18 +29,18 @@ export default {
     chats:[],
     txtVal: '',
     player: true,
-    srcArray:[
-      {imgMe:require('./assets/me.jpg')},
-      {imgYou:require('@/assets/you.jpg')},
-    ],
-    altArray:[
-      {me:'自分の画像'},
-      {you:'相手の画像'},
-    ],
+    // srcArray:[
+    //   {imgMe:require('./assets/me.jpg')},
+    //   {imgYou:require('@/assets/you.jpg')},
+    // ],
+    // altArray:[
+    //   {me:'自分の画像'},
+    //   {you:'相手の画像'},
+    // ],
   }),
   components:{
     EntryParts,
-    UserList
+    MessageList
   },
   methods:{
     addArrayMe:function(){
@@ -56,12 +54,9 @@ export default {
       this.chats.push(chatYou); //配列にボットのメッセージを入れる
       console.log(this.chats);
     },
-		isAlt:function(){
-      this.altArray.forEach(alt => {
-        console.log('isalt発動');
-			return this.player ? alt.me: alt.you;
-      });
-		},
+		// isAlt:function(){
+		// 	return this.player ? alt.me: alt.you;
+		// },
     // reRenderHTML(){
     //   this.message.innerHTML = '';
     //   this.message.appendChild('a');

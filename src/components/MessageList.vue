@@ -1,42 +1,22 @@
 <template>
 	<div id="message_area" class="message_area">
-		<ul>
-			<!-- <UserMeParts :txtVal="txtVal" @input="$emit('update:txtVal', $event.target.value)"/> -->
-			<li v-for="chat in chats" :key="chat">
-				<div :class="isPlayer()">
-					<p>{{chat.txt}}</p>
-					<div>
-						<!--  v-for="alt in altArray" :key="alt" -->
-						<!-- :alt="this.$emit('isAlt')" -->
-						<img :src="src" width="40" height="40" :alt="this.$emit('isAltEmit')">
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="you_message">
-					<div><img src="@/assets/you.jpg" width="40" height="40" alt="相手の画像"></div>
-					<div><p>後から処理を適用します。</p></div>
-				</div>
-			</li>
+		<ul v-for="chat in chats" :key="chat">
+			<MessageRender
+			:chat="chat"
+			:player="player"
+			:txtVal="txtVal"
+			/>
 		</ul>
 	</div>
 </template>
 
 <script>
-// import assets from "@/assets/me.jpg";
+import MessageRender from '../components/MessageRender.vue'
 
 export default {
-	name: 'UserList',
-	props: ['chats','txtVal','player','srcArray','altArray'], //App.vueのデータを扱う
+	name: 'MessageList',
+	props: ['chats','txtVal','player'], //App.vueのデータを扱う
 	data:()=>({
-		randomTxt : [
-		'こんにちは！メッセージありがと〜！',
-		'元気？僕は元気だよー！',
-		'いえ〜い！！',
-		'僕はチャットボットのマークだよ！',
-		'...',
-		'大吉！',
-		],
 		// isPlayer:this.player,
 	}),
 	computed:{
@@ -46,13 +26,13 @@ export default {
 			console.log(this.player);
 			return this.player ? 'my_message': 'you_message'
 		},
-		// isAlt:function(){
-		// 	return this.player ? this.alt.me: this.alt.you
-		// },
-		isAltEmit() {
-			this.$emit('isAlt')
-			},
+		// isAltEmit() {
+		// 	this.$emit('isAlt')
+		// 	},
 	},
+	components:{
+		MessageRender,
+	}
 }
 </script>
 
