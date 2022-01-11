@@ -10,7 +10,7 @@
   <!--親コンポーネント：v-on:イベント名で値を受け取る -->
     <EntryParts
     v-model:txtVal="txtVal"
-    @addBtnParts="addArrayMe"
+    @addBtnParts="reRenderHTML()"
     />
   <!-- <div v-for="alt in altArray" :key="alt">
   <p>{{alt.me}}</p>
@@ -29,38 +29,36 @@ export default {
     chats:[],
     txtVal: '',
     player: true,
-    // srcArray:[
-    //   {imgMe:require('./assets/me.jpg')},
-    //   {imgYou:require('@/assets/you.jpg')},
-    // ],
-    // altArray:[
-    //   {me:'自分の画像'},
-    //   {you:'相手の画像'},
-    // ],
   }),
   components:{
     EntryParts,
     MessageList
   },
   methods:{
-    addArrayMe:function(){
-      let chatMe = { player: this.player, txt: this.txtVal };
-      this.chats.push(chatMe); //配列にユーザーのメッセージを入れる
-      this.txtVal = '' //入力後、文字列を空にする
-      console.log(this.chats);
+    // ユーザーのメッセージを追加
+    addArrayMe(){
+      let chatMe = {
+        player: this.player,
+        txt: this.txtVal,
+      };
+        this.chats.push(chatMe); //配列にユーザーのメッセージを入れる
+        this.txtVal = '' //入力後、文字列を空にする
+        console.log(this.chats);
     },
-    addArrayYou:function(){
-      let chatYou = { player: this.player, txt: '今はテキストを挿入します' };
+   // ボットのメッセージを追加
+    addArrayYou(){
+      let chatYou = {
+        player: !this.player,
+        txt: 'jjjj',
+      };
       this.chats.push(chatYou); //配列にボットのメッセージを入れる
       console.log(this.chats);
     },
-		// isAlt:function(){
-		// 	return this.player ? alt.me: alt.you;
-		// },
-    // reRenderHTML(){
-    //   this.message.innerHTML = '';
-    //   this.message.appendChild('a');
-    // }
+    reRenderHTML(){
+      // this.message.innerHTML = '';
+      this.addArrayMe();
+      setTimeout(() => {this.addArrayYou();}, 2000); //2秒後に実行
+    }
   },
 }
 </script>

@@ -1,14 +1,12 @@
 <template>
 	<li>
 		<div :class="isPlayer()">
-			<p>{{chat.txt}}</p>
+			<p>{{iconTxt}}</p>
 			<div>
-				<!--  v-for="alt in altArray" :key="alt" -->
 				<!-- :alt="this.$emit('isAlt')" -->
 				<img
-				v-for="imgSet in imgArray" :key="imgSet"
-				:src="this.renderPlayer ? imgSet.pathMe: imgSet.pathYou"
-				:alt="this.renderPlayer ? imgSet.altMe : imgSet.altYou"
+				:src="iconSrc"
+				:alt="iconAlt"
 				width="40"
 				height="40"
 				>
@@ -39,32 +37,29 @@ export default {
 		'...',
 		'大吉！',
 		],
-    imgArray:[
-		{pathMe :require('@/assets/me.jpg') , altMe:'自分の画像'},
-		{pathYou:require('@/assets/you.jpg'), altYou:'相手の画像'},
-    ],
-    // altArray:[
-	// 	{me:'自分の画像'},
-	// 	{you:'相手の画像'},
-    // ],
 	}),
 	computed:{
-		// isSrc:function(){
-		// 	return this.player ? src.imgMe: src.imgYou
-		// },
+		iconSrc(){
+			return this.chat.player ? require('@/assets/me.jpg'): require('@/assets/you.jpg');
+		},
+		iconAlt(){
+			return this.chat.player ? '自分の画像': '相手の画像';
+		},
+		iconTxt(){
+			return this.chat.player ? this.chat.txt: this.randomTxt;
+		},
 	},
 	methods:{
+		
 		isPlayer:function(){
 			console.log(this.player);
 			return this.player ? 'my_message': 'you_message'
-		},
-		isAlt:function(){
-			return this.player ? this.alt.me: this.alt.you
 		},
 		// isAltEmit() {
 		// 	this.$emit('isAlt')
 		// 	},
 	},
+	emit:['randomTxt'],
 }
 </script>
 
