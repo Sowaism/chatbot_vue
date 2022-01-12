@@ -1,5 +1,4 @@
 <template>
-	<li>
 		<div :class="isPlayer()">
 			<p>{{iconTxt}}</p>
 			<div>
@@ -12,7 +11,6 @@
 				>
 			</div>
 		</div>
-	</li>
 	<!-- <li>
 		<div class="you_message">
 			<div><img src="@/assets/you.jpg" width="40" height="40" alt="相手の画像"></div>
@@ -40,13 +38,13 @@ export default {
 	}),
 	computed:{
 		iconSrc(){
-			return this.chat.player ? require('@/assets/me.jpg'): require('@/assets/you.jpg');
+			return this.chat.sender ? require('@/assets/me.jpg'): require('@/assets/you.jpg');
 		},
 		iconAlt(){
-			return this.chat.player ? '自分の画像': '相手の画像';
+			return this.chat.sender ? '自分の画像': '相手の画像';
 		},
 		iconTxt(){
-			return this.chat.player ? this.chat.txt: this.randomTxt;
+			return this.chat.sender ? this.chat.txt: this.randomTxt;
 		},
 	},
 	methods:{

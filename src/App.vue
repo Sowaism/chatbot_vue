@@ -38,7 +38,7 @@ export default {
     // ユーザーのメッセージを追加
     addArrayMe(){
       let chatMe = {
-        player: this.player,
+        sender: this.player,
         txt: this.txtVal,
       };
         this.chats.push(chatMe); //配列にユーザーのメッセージを入れる
@@ -48,7 +48,7 @@ export default {
    // ボットのメッセージを追加
     addArrayYou(){
       let chatYou = {
-        player: !this.player,
+        sender: !this.player,
         txt: 'jjjj',
       };
       this.chats.push(chatYou); //配列にボットのメッセージを入れる

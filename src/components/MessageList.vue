@@ -1,11 +1,13 @@
 <template>
 	<div id="message_area" class="message_area">
-		<ul v-for="chat in chats" :key="chat">
-			<MessageRender
-			:chat="chat"
-			:player="player"
-			:txtVal="txtVal"
-			/>
+		<ul>
+			<li v-for="chat in chats" :key="chat">
+				<MessageRender
+				:chat="chat"
+				:player="player"
+				:txtVal="txtVal"
+				/>
+			</li>
 		</ul>
 	</div>
 </template>
