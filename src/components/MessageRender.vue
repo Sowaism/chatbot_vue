@@ -1,8 +1,7 @@
 <template>
-		<div :class="isPlayer()">
-			<p>{{iconTxt}}</p>
+	<div :class="isPlayer">
+		<p>{{iconTxt}}</p>
 			<div>
-				<!-- :alt="this.$emit('isAlt')" -->
 				<img
 				:src="iconSrc"
 				:alt="iconAlt"
@@ -10,13 +9,7 @@
 				height="40"
 				>
 			</div>
-		</div>
-	<!-- <li>
-		<div class="you_message">
-			<div><img src="@/assets/you.jpg" width="40" height="40" alt="相手の画像"></div>
-			<div><p>後から処理を適用します。</p></div>
-		</div>
-	</li> -->
+	</div>
 </template>
 
 <script>
@@ -24,9 +17,8 @@
 
 export default {
 	name: 'MessageRender',
-	props: ['chat','txtVal','player'], //App.vueのデータを扱う
+	props: ['chat','txtVal'], //App.vueのデータを扱う
 	data:()=>({
-		// renderPlayer:this.player,
 		randomTxt : [
 		'こんにちは！メッセージありがと〜！',
 		'元気？僕は元気だよー！',
@@ -46,16 +38,12 @@ export default {
 		iconTxt(){
 			return this.chat.sender ? this.chat.txt: this.randomTxt;
 		},
+		isPlayer(){
+			console.log(this.chat.sender);
+			return this.chat.sender ? 'my_message': 'you_message'
+		},
 	},
 	methods:{
-		
-		isPlayer:function(){
-			console.log(this.player);
-			return this.player ? 'my_message': 'you_message'
-		},
-		// isAltEmit() {
-		// 	this.$emit('isAlt')
-		// 	},
 	},
 	emit:['randomTxt'],
 }
@@ -116,6 +104,10 @@ li{
 	margin-right: 8px;
 	position: relative;
 	z-index: 3;
+	order: 2;
+}
+.you_message div{
+	order: 1;
 }
 .you_message p:before{
 	content: "";

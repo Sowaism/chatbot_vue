@@ -1,21 +1,18 @@
+<!--親コンポーネント：v-bind:props名="state名"でMessageListに値を渡す -->
+<!--親コンポーネント：v-on:イベント名で値を受け取る -->
 <template>
-  <div class="chatbot">
-  <!--親コンポーネント：v-bind:props名="state名"でUserListに値を渡す -->
-  <!--     v-model:txtVal="txtVal" -->
+  <div
+    ref="contents"
+    class="chatbot"
+  >
     <MessageList
-    :chats="chats"
-    :player="player"
-    :txtVal="txtVal"
+      :chats="chats"
+      :txtVal="txtVal"
     />
-  <!--親コンポーネント：v-on:イベント名で値を受け取る -->
     <EntryParts
-    v-model:txtVal="txtVal"
-    @addBtnParts="reRenderHTML()"
+      v-model:txtVal="txtVal"
+      @addBtnParts="reRenderHTML()"
     />
-  <!-- <div v-for="alt in altArray" :key="alt">
-  <p>{{alt.me}}</p>
-  <p>{{src.imgMe}}</p>
-  </div> -->
   </div>
 </template>
 
@@ -28,38 +25,67 @@ export default {
   data:()=>({ //dataだけは、アロー関数で記述できます
     chats:[],
     txtVal: '',
-    player: true,
   }),
   components:{
     EntryParts,
     MessageList
   },
   methods:{
-    // ユーザーのメッセージを追加
-    addArrayMe(){
+
+    addArrayMe(){ // ユーザーのメッセージを追加
       let chatMe = {
-        sender: this.player,
+        sender: true,
         txt: this.txtVal,
       };
         this.chats.push(chatMe); //配列にユーザーのメッセージを入れる
         this.txtVal = '' //入力後、文字列を空にする
         console.log(this.chats);
+        this.saveToLocalStorage();
     },
-   // ボットのメッセージを追加
-    addArrayYou(){
+    addArrayYou(){ // ボットのメッセージを追加
       let chatYou = {
-        sender: !this.player,
+        sender: false,
         txt: 'jjjj',
       };
       this.chats.push(chatYou); //配列にボットのメッセージを入れる
       console.log(this.chats);
+      this.saveToLocalStorage();
+    },
+    // scrollToBottom(){
+    //   const dom = this.$refs.contents; //タグを参照
+    //   const rect = dom.clientHeight; //要素の高さを取得
+    //   dom.scrollTo(0, rect);
+    //   console.log(rect);
+    //   console.log(dom.scrollTo(0, rect));
+    // nextTick関数を使えばいける？
+    // },
+    saveToLocalStorage() {
+      const jsonObj = JSON.stringify(this.chats);
+      localStorage.setItem('chats', jsonObj);
+    },
+    loadFromLocalStorage() {
+      if (localStorage.hasOwnProperty('chats')) { //ここがうまくいってない
+        console.log('ローカルストレージ保存したものを出力');
+        const chatsObj = localStorage.getItem('chats');
+        const jsObj = JSON.parse(chatsObj);
+        // this.chats = '';
+        console.log(jsObj);
+        console.log('jsObj');
+        this.chats = jsObj;
+        this.reRenderHTML();
+      }
     },
     reRenderHTML(){
-      // this.message.innerHTML = '';
       this.addArrayMe();
       setTimeout(() => {this.addArrayYou();}, 2000); //2秒後に実行
-    }
+      // this.scrollToBottom();
+    },
   },
+  mounted() { //ライフサイクルフック
+    window.onload = ()=>{
+      this.loadFromLocalStorage();
+  }
+}
 }
 </script>
 

@@ -1,3 +1,4 @@
+<!--子コンポーネントから親コンポーネントのイベントを発火する https://qiita.com/m_suzu/items/ddb9e68de63c669d408d -->
 <template>
 	<button
 	id="addbtn"
@@ -6,9 +7,7 @@
 	>
 	送信
 	</button>
-	<!--子コンポーネントから親コンポーネントのイベントを発火する https://qiita.com/m_suzu/items/ddb9e68de63c669d408d -->
 </template>
-
 <script>
 export default {
 	name: 'Button',

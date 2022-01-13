@@ -1,12 +1,11 @@
 <template>
 	<div id="message_area" class="message_area">
 		<ul>
-			<li v-for="chat in chats" :key="chat">
-				<MessageRender
-				:chat="chat"
-				:player="player"
-				:txtVal="txtVal"
-				/>
+			<li v-for="(chat,index) in chats" :key="index">
+			<MessageRender
+			:chat="chat"
+			:txtVal="txtVal"
+			/>
 			</li>
 		</ul>
 	</div>
@@ -17,23 +16,9 @@ import MessageRender from '../components/MessageRender.vue'
 
 export default {
 	name: 'MessageList',
-	props: ['chats','txtVal','player'], //App.vueのデータを扱う
-	data:()=>({
-		// isPlayer:this.player,
-	}),
-	computed:{
-	},
-	methods:{
-		isPlayer:function(){
-			console.log(this.player);
-			return this.player ? 'my_message': 'you_message'
-		},
-		// isAltEmit() {
-		// 	this.$emit('isAlt')
-		// 	},
-	},
+	props: ['chats','txtVal'], //App.vueのデータを扱う
 	components:{
-		MessageRender,
+		MessageRender
 	}
 }
 </script>
