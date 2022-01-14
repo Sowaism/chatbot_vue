@@ -1,13 +1,12 @@
 <!--親コンポーネント：v-bind:props名="state名"でMessageListに値を渡す -->
 <!--親コンポーネント：v-on:イベント名で値を受け取る -->
 <template>
-  <div
-    ref="contents"
-    class="chatbot"
-  >
+  <div class="chatbot">
     <MessageList
       :chats="chats"
       :txtVal="txtVal"
+      ref="contents"
+      @emitScrollToBottom="scrollToBottom()"
     />
     <EntryParts
       v-model:txtVal="txtVal"
@@ -31,7 +30,6 @@ export default {
     MessageList
   },
   methods:{
-
     addArrayMe(){ // ユーザーのメッセージを追加
       let chatMe = {
         sender: true,
@@ -52,33 +50,35 @@ export default {
       this.saveToLocalStorage();
     },
     // scrollToBottom(){
-    //   const dom = this.$refs.contents; //タグを参照
+    //   const dom  = this.$refs.contents[0]; //タグを参照
     //   const rect = dom.clientHeight; //要素の高さを取得
     //   dom.scrollTo(0, rect);
     //   console.log(rect);
+    //   console.log(dom);
     //   console.log(dom.scrollTo(0, rect));
-    // nextTick関数を使えばいける？
     // },
     saveToLocalStorage() {
       const jsonObj = JSON.stringify(this.chats);
       localStorage.setItem('chats', jsonObj);
     },
     loadFromLocalStorage() {
-      if (localStorage.hasOwnProperty('chats')) { //ここがうまくいってない
-        console.log('ローカルストレージ保存したものを出力');
         const chatsObj = localStorage.getItem('chats');
         const jsObj = JSON.parse(chatsObj);
-        // this.chats = '';
         console.log(jsObj);
-        console.log('jsObj');
+      if (jsObj) { //jsObj !== null
+        console.log('ローカルストレージ保存したものを出力');
         this.chats = jsObj;
         this.reRenderHTML();
       }
     },
+    emitScrollToBottom() {
+      console.log('テスト')
+      this.$refs.contents[0].scrollToBottom()
+    },
     reRenderHTML(){
       this.addArrayMe();
       setTimeout(() => {this.addArrayYou();}, 2000); //2秒後に実行
-      // this.scrollToBottom();
+      this.emitScrollToBottom()
     },
   },
   mounted() { //ライフサイクルフック

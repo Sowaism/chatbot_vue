@@ -19,7 +19,20 @@ export default {
 	props: ['chats','txtVal'], //App.vueのデータを扱う
 	components:{
 		MessageRender
-	}
+	},
+	methods:{
+		scrollToBottom(){
+			const dom  = this.$refs.contents; //タグを参照
+			const rect = dom.clientHeight; //要素の高さを取得
+			dom.scrollTo(0, rect);
+			console.log(rect);
+			console.log(dom);
+			console.log(dom.scrollTo(0, rect));
+		},
+		// emicrollToBottom() {
+		// 	this.$emit('child-emit')
+		// 	},
+	},
 }
 </script>
 
