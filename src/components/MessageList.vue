@@ -28,6 +28,8 @@ export default {
 			console.log(rect);
 			console.log(dom);
 			console.log(dom.scrollTo(0, rect));
+			// console.log(this.$refs.contents)
+
 		},
 		// emicrollToBottom() {
 		// 	this.$emit('child-emit')

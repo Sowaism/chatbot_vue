@@ -73,7 +73,9 @@ export default {
     },
     emitScrollToBottom() {
       console.log('テスト')
-      this.$refs.contents[0].scrollToBottom()
+      console.log(this.$refs.contents)
+      console.log(this.$refs.contents.scrollToBottom)
+      this.$refs.contents.scrollToBottom
     },
     reRenderHTML(){
       this.addArrayMe();
