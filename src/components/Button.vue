@@ -1,12 +1,11 @@
 <!--子コンポーネントから親コンポーネントのイベントを発火する https://qiita.com/m_suzu/items/ddb9e68de63c669d408d -->
+<!-- $emit('scrollBtn');" -->
 <template>
 	<button
 	id="addbtn"
 	:disabled="isDisabled"
 	@click="$emit('addBtn')"
-	>
-	送信
-	</button>
+	>送信</button>
 </template>
 <script>
 export default {
@@ -21,6 +20,9 @@ export default {
 		addBtn(){
 			this.$emit('addBtnParts')
 		},
+		// scrollBtn(){
+		// 	this.$emit('scrollBtnParts')
+		// },
 	}
 }
 </script>

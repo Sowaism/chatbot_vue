@@ -1,5 +1,5 @@
 <template>
-	<div id="message_area" class="message_area">
+	<div id="message_area" class="message_area" ref="contents">
 		<ul>
 			<li v-for="(chat,index) in chats" :key="index">
 			<MessageRender
@@ -22,18 +22,16 @@ export default {
 	},
 	methods:{
 		scrollToBottom(){
-			const dom  = this.$refs.contents; //タグを参照
-			const rect = dom.clientHeight; //要素の高さを取得
-			dom.scrollTo(0, rect);
-			console.log(rect);
-			console.log(dom);
-			console.log(dom.scrollTo(0, rect));
-			// console.log(this.$refs.contents)
+		const chatHeight = () => this.$refs.contents.scrollHeight; //要素の高さを取得
+			// debugger; // eslint-disable-line no-debugger
+			console.log(this.$refs.contents.scrollHeight);
 
+			this.$refs.contents.scrollTo(0, chatHeight());
+			// console.log(rect);
+			// console.log(dom);
+			// console.log(dom.scrollTo(0, rect));
+			// console.log(this.$refs.contents)
 		},
-		// emicrollToBottom() {
-		// 	this.$emit('child-emit')
-		// 	},
 	},
 }
 </script>

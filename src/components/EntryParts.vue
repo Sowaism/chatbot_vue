@@ -9,6 +9,7 @@
 		:isDisabled="isDisabled"
 		@addBtn="$emit('addBtnParts')"
 		/>
+		<!-- 		@scrollBtn="$emit('scrollBtnParts')" -->
 		<!-- <div v-for="(chat,index) in chats" :key="index">
 		{{chat.me.txt}}
 		</div> -->
@@ -40,8 +41,11 @@ export default {
 	},
 	methods:{
 		addBtnParts(){
-			this.$emit('addArrayMe')
+			this.$emit('reRenderHTML')
 		},
+		// scrollBtnParts(){
+		// 	this.$emit('emitScrollToBottom')
+		// },
 	}
 }
 </script>

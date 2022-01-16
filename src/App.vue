@@ -1,17 +1,18 @@
 <!--親コンポーネント：v-bind:props名="state名"でMessageListに値を渡す -->
 <!--親コンポーネント：v-on:イベント名で値を受け取る -->
+<!--      @emitScrollToBottom="scrollToBottom()"-->
 <template>
   <div class="chatbot">
     <MessageList
       :chats="chats"
       :txtVal="txtVal"
       ref="contents"
-      @emitScrollToBottom="scrollToBottom()"
     />
     <EntryParts
       v-model:txtVal="txtVal"
       @addBtnParts="reRenderHTML()"
     />
+    <!-- @scrollBtnParts="emitScrollToBottom()" -->
   </div>
 </template>
 
@@ -36,8 +37,9 @@ export default {
         txt: this.txtVal,
       };
         this.chats.push(chatMe); //配列にユーザーのメッセージを入れる
+        this.emitScrollToBottom();
         this.txtVal = '' //入力後、文字列を空にする
-        console.log(this.chats);
+        // console.log(this.chats);
         this.saveToLocalStorage();
     },
     addArrayYou(){ // ボットのメッセージを追加
@@ -46,17 +48,10 @@ export default {
         txt: 'jjjj',
       };
       this.chats.push(chatYou); //配列にボットのメッセージを入れる
-      console.log(this.chats);
+      this.emitScrollToBottom();
+      // console.log(this.chats);
       this.saveToLocalStorage();
     },
-    // scrollToBottom(){
-    //   const dom  = this.$refs.contents[0]; //タグを参照
-    //   const rect = dom.clientHeight; //要素の高さを取得
-    //   dom.scrollTo(0, rect);
-    //   console.log(rect);
-    //   console.log(dom);
-    //   console.log(dom.scrollTo(0, rect));
-    // },
     saveToLocalStorage() {
       const jsonObj = JSON.stringify(this.chats);
       localStorage.setItem('chats', jsonObj);
@@ -64,7 +59,7 @@ export default {
     loadFromLocalStorage() {
         const chatsObj = localStorage.getItem('chats');
         const jsObj = JSON.parse(chatsObj);
-        console.log(jsObj);
+        // console.log(jsObj);
       if (jsObj) { //jsObj !== null
         console.log('ローカルストレージ保存したものを出力');
         this.chats = jsObj;
@@ -73,14 +68,14 @@ export default {
     },
     emitScrollToBottom() {
       console.log('テスト')
-      console.log(this.$refs.contents)
-      console.log(this.$refs.contents.scrollToBottom)
-      this.$refs.contents.scrollToBottom
+      // console.log(this.$refs.contents)
+      // console.log(this.$refs.contents.scrollToBottom)
+      this.$refs.contents.scrollToBottom()
     },
     reRenderHTML(){
       this.addArrayMe();
+      this.emitScrollToBottom();
       setTimeout(() => {this.addArrayYou();}, 2000); //2秒後に実行
-      this.emitScrollToBottom()
     },
   },
   mounted() { //ライフサイクルフック

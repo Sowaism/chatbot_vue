@@ -36,10 +36,10 @@ export default {
 			return this.chat.sender ? '自分の画像': '相手の画像';
 		},
 		iconTxt(){
-			return this.chat.sender ? this.chat.txt: this.randomTxt;
+			return this.chat.sender ? this.chat.txt: this.randomTxt[0];
 		},
 		isPlayer(){
-			console.log(this.chat.sender);
+			// console.log(this.chat.sender);
 			return this.chat.sender ? 'my_message': 'you_message'
 		},
 	},
@@ -50,18 +50,6 @@ export default {
 </script>
 
 <style scoped>
-ul{
-	margin: 0 auto;
-	padding: 0;
-	width:300px;
-}
-#message_area {
-	height: calc(100vh - 36px);
-	overflow: scroll;
-}
-li{
-	list-style: none;
-}
 .my_message{
 	display: flex;
 	justify-content:flex-end;
