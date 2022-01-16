@@ -37,8 +37,8 @@ export default {
         txt: this.txtVal,
       };
         this.chats.push(chatMe); //配列にユーザーのメッセージを入れる
-        this.emitScrollToBottom();
         this.txtVal = '' //入力後、文字列を空にする
+        this.emitScrollToBottom();
         // console.log(this.chats);
         this.saveToLocalStorage();
     },
@@ -48,8 +48,8 @@ export default {
         txt: 'jjjj',
       };
       this.chats.push(chatYou); //配列にボットのメッセージを入れる
-      this.emitScrollToBottom();
       // console.log(this.chats);
+      this.emitScrollToBottom();
       this.saveToLocalStorage();
     },
     saveToLocalStorage() {
@@ -73,8 +73,8 @@ export default {
       this.$refs.contents.scrollToBottom()
     },
     reRenderHTML(){
+      // this.$refs.contents.innerHTML = '';
       this.addArrayMe();
-      this.emitScrollToBottom();
       setTimeout(() => {this.addArrayYou();}, 2000); //2秒後に実行
     },
   },
