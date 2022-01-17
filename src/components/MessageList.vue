@@ -24,9 +24,9 @@ export default {
 		scrollToBottom(){
 		const chatHeight = () => this.$refs.contents.scrollHeight; //要素の高さを取得
 			// debugger; // eslint-disable-line no-debugger
-			console.log(this.$refs.contents.scrollHeight);
 
 			this.$refs.contents.scrollTo(0, chatHeight());
+			console.log(this.$refs.contents.scrollHeight);
 			// console.log(rect);
 			// console.log(dom);
 			// console.log(dom.scrollTo(0, rect));

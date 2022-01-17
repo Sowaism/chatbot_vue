@@ -38,9 +38,10 @@ export default {
       };
         this.chats.push(chatMe); //配列にユーザーのメッセージを入れる
         this.txtVal = '' //入力後、文字列を空にする
-        this.emitScrollToBottom();
-        // console.log(this.chats);
         this.saveToLocalStorage();
+        this.$nextTick(function () { //前の処理が終わってから実行
+          this.emitScrollToBottom();
+        });
     },
     addArrayYou(){ // ボットのメッセージを追加
       let chatYou = {
@@ -48,9 +49,11 @@ export default {
         txt: 'jjjj',
       };
       this.chats.push(chatYou); //配列にボットのメッセージを入れる
-      // console.log(this.chats);
-      this.emitScrollToBottom();
       this.saveToLocalStorage();
+      console.log('ボット');
+      this.$nextTick(function () { //前の処理が終わってから実行
+        this.emitScrollToBottom();
+      })
     },
     saveToLocalStorage() {
       const jsonObj = JSON.stringify(this.chats);
@@ -67,15 +70,18 @@ export default {
       }
     },
     emitScrollToBottom() {
-      console.log('テスト')
       // console.log(this.$refs.contents)
       // console.log(this.$refs.contents.scrollToBottom)
+      // this.$nextTick(() => {// ビュー全体がレンダリングされた後にのみ実行されるコード
       this.$refs.contents.scrollToBottom()
+      console.log('スクロール下メソッド！！！')
+        // });
     },
     reRenderHTML(){
-      // this.$refs.contents.innerHTML = '';
+      // debugger; // eslint-disable-line no-debugger
+      // this.chats.innerHTML = '';
       this.addArrayMe();
-      setTimeout(() => {this.addArrayYou();}, 2000); //2秒後に実行
+      setTimeout(this.addArrayYou, 2000); //2秒後に実行
     },
   },
   mounted() { //ライフサイクルフック
