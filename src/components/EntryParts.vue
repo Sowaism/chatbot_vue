@@ -43,9 +43,6 @@ export default {
 		addBtnParts(){
 			this.$emit('reRenderHTML')
 		},
-		// scrollBtnParts(){
-		// 	this.$emit('emitScrollToBottom')
-		// },
 	}
 }
 </script>

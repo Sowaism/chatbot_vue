@@ -36,7 +36,7 @@ export default {
 			return this.chat.sender ? '自分の画像': '相手の画像';
 		},
 		iconTxt(){
-			return this.chat.sender ? this.chat.txt: this.randomTxt[0];
+			return this.chat.sender ? this.chat.txt: this.randomMessage();
 		},
 		isPlayer(){
 			// console.log(this.chat.sender);
@@ -44,6 +44,12 @@ export default {
 		},
 	},
 	methods:{
+		randomMessage(){
+			// console.log(Math.floor(Math.random() * this.randomTxt.length));
+			const randomValue = Math.floor(Math.random() * this.randomTxt.length);
+			this.randomTxt[randomValue];
+			console.log(this.randomTxt[randomValue]);
+		}
 	},
 	emit:['randomTxt'],
 }
